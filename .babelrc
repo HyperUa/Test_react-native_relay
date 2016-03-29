@@ -1,0 +1,7 @@
+{
+  "presets": [
+    "./babelRelayPlugin",
+    "react-native"
+  ],
+  "passPerPreset": true
+}
