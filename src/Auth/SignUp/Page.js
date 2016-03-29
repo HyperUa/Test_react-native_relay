@@ -32,7 +32,7 @@ export default class Page extends Component {
     errors: {}
   };
 
-  getData = () => {
+  getData() {
     return this.state.form;
   };
 
@@ -46,14 +46,14 @@ export default class Page extends Component {
     return error;
   }
 
-  isValid = () => {
+  isValid() {
     const { isValid, errors } = validateData(this.getData(), this.validationRules);
 
     this.setState({errors});
     return isValid;
   };
 
-  handleCreateButton = () => {
+  handleCreateButton() {
     if (this.isValid()) {
       fetch(getUrl('register'), {
         method: 'POST',
@@ -70,17 +70,17 @@ export default class Page extends Component {
           console.log(responceData);
 
           if (responceData.status === 'ok') {
-            console.log('OK. Go redirection');
+            return this.props.routes.dashboard();
           }
         })
     }
   };
 
-  handleFacebookButton = () => {
+  handleFacebookButton() {
     console.log('facebook');
   };
 
-  handleFormChange = (element) => {
+  handleFormChange(element) {
     return (event) => {
       this.setState({
         form: {
@@ -91,7 +91,7 @@ export default class Page extends Component {
     }
   };
 
-  handleFormCheckboxChange = () => {
+  handleFormCheckboxChange() {
     this.setState({
       form: {
         ...this.state.form,
@@ -100,7 +100,7 @@ export default class Page extends Component {
     });
   };
 
-  handleClick = () => {
+  handleClick() {
     return this.props.routes.login();
   };
 
@@ -143,14 +143,14 @@ export default class Page extends Component {
           <Checkbox
             label={<Text>I agree to the Terms & Conditions</Text>}
             checked={!!this.state.form.terms}
-            onChange={this.handleFormCheckboxChange}
+            onChange={this.handleFormCheckboxChange.bind(this)}
           />
         </View>
 
         <View style={styles.block}>
           <TouchableHighlight
             style={[styles.center, styles.button, styles.buttonCreate]}
-            onPress={this.handleCreateButton}
+            onPress={this.handleCreateButton.bind(this)}
           >
             <Text style={styles.buttonText}>Create account</Text>
           </TouchableHighlight>
@@ -171,7 +171,7 @@ export default class Page extends Component {
 
         <View style={styles.block}>
           <TouchableHighlight
-            onPress={this.handleClick}
+            onPress={this.handleClick.bind(this)}
           >
             <Text style={styles.buttonText}>Go to SignIn</Text>
           </TouchableHighlight>

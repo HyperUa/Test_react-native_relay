@@ -64,7 +64,7 @@ export default class Page extends Component {
           console.log(responceData);
 
           if (responceData.status === 'ok') {
-            console.log('OK. Go redirection');
+            return this.props.routes.dashboard();
           }
         })
     }
@@ -85,7 +85,7 @@ export default class Page extends Component {
     }
   };
 
-  handleClick = () => {
+  handleClick() {
     return this.props.routes.register();
   };
 
@@ -140,7 +140,7 @@ export default class Page extends Component {
 
         <View style={styles.block}>
           <TouchableHighlight
-            onPress={this.handleClick}
+            onPress={this.handleClick.bind(this)}
           >
             <Text style={styles.buttonText}>Go to SignUp</Text>
           </TouchableHighlight>
